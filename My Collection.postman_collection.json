@@ -1,0 +1,84 @@
+{
+  "info": {
+    "_postman_id": "bd516c4b-0982-41cf-b5f6-72e7ff9f3c8f",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49990609",
+    "_collection_link": "https://blue-shadow-2433109.postman.co/workspace/fe1c5fcb-31c5-491a-8b82-00b5db5410f2/collection/49990609-bd516c4b-0982-41cf-b5f6-72e7ff9f3c8f?action=share&source=collection_link&creator=49990609"
+  },
+  "item": [
+    {
+      "name": "Додати новий інвентар",
+      "id": "a44d1898-314e-4e6c-ad9b-8b5d43017594",
+      "request": {
+        "method": "POST",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Отримати весь список інвентаря",
+      "id": "253b6d9a-7751-4b2c-b610-ebdaa6495e19",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Отримати один елемент по ID",
+      "id": "ebfd6af0-34f5-4ce8-bdac-16a040076998",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Оновити імʼя або опис інвентаря",
+      "id": "5323cfc4-c661-401e-83b3-f7f3a0608df1",
+      "request": {
+        "method": "PUT",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Отримати фото інвентаря",
+      "id": "40b4fdd5-21ff-4834-aac7-fb99f9e707fe",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Оновити фото",
+      "id": "8b98536d-0556-46fb-96aa-9b2b14a45081",
+      "request": {
+        "method": "PUT",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Видалити інвентар",
+      "id": "a6dad855-3272-4d33-92a3-db8a56a6329d",
+      "request": {
+        "method": "DELETE",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Пошук інвентаря через форму",
+      "id": "0d73571e-7a0a-4e82-89bc-a917268669be",
+      "request": {
+        "method": "POST",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
