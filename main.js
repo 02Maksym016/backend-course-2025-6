@@ -1,6 +1,3 @@
-// ------------------------
-//   Imports
-// ------------------------
 import { Command } from "commander";
 import express from "express";
 import multer from "multer";
@@ -8,9 +5,7 @@ import fs from "fs";
 import path from "path";
 import cors from "cors";
 
-// ------------------------
-//   CLI arguments
-// ------------------------
+
 const program = new Command();
 
 program
@@ -22,16 +17,15 @@ program.parse(process.argv);
 
 const { host, port, cache: cacheDir } = program.opts();
 
-// ------------------------
-//   Ensure cache directory
-// ------------------------
+
+
+
 if (!fs.existsSync(cacheDir)) {
   fs.mkdirSync(cacheDir, { recursive: true });
 }
 
-// ------------------------
 //   Data storage
-// ------------------------
+
 const DATA_FILE = "data.json";
 if (!fs.existsSync(DATA_FILE)) {
   fs.writeFileSync(DATA_FILE, JSON.stringify([]));
@@ -41,17 +35,16 @@ if (!fs.existsSync(DATA_FILE)) {
 const loadData = () => JSON.parse(fs.readFileSync(DATA_FILE));
 const saveData = (data) => fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 
-// ------------------------
 //   Express setup
-// ------------------------
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ------------------------
+
 //   Multer for photos
-// ------------------------
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, cacheDir),
   filename: (req, file, cb) => {
@@ -61,9 +54,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// ------------------------
+
 //   Serve HTML forms
-// ------------------------
+
 app.get("/RegisterForm", (req, res) => {
   res.sendFile(path.resolve("RegisterForm.html"));
 });
@@ -72,9 +65,9 @@ app.get("/SearchForm", (req, res) => {
   res.sendFile(path.resolve("SearchForm.html"));
 });
 
-// ------------------------
+
 //   POST /register
-// ------------------------
+
 app.post("/register", upload.single("photo"), (req, res) => {
   const { inventory_name, description } = req.body;
 
@@ -96,9 +89,9 @@ app.post("/register", upload.single("photo"), (req, res) => {
   res.status(201).json(newItem);
 });
 
-// ------------------------
+
 //   GET /inventory
-// ------------------------
+
 app.get("/inventory", (req, res) => {
   const items = loadData();
   const result = items.map((x) => ({
@@ -108,9 +101,9 @@ app.get("/inventory", (req, res) => {
   res.json(result);
 });
 
-// ------------------------
+
 //   GET /inventory/:id
-// ------------------------
+
 app.get("/inventory/:id", (req, res) => {
   const items = loadData();
   const item = items.find((i) => i.id === req.params.id);
@@ -123,9 +116,9 @@ app.get("/inventory/:id", (req, res) => {
   });
 });
 
-// ------------------------
+
 //   PUT /inventory/:id
-// ------------------------
+
 app.put("/inventory/:id", (req, res) => {
   const items = loadData();
   const item = items.find((i) => i.id === req.params.id);
@@ -139,9 +132,9 @@ app.put("/inventory/:id", (req, res) => {
   res.json({ message: "Updated", item });
 });
 
-// ------------------------
+
 //   GET /inventory/:id/photo
-// ------------------------
+
 app.get("/inventory/:id/photo", (req, res) => {
   const items = loadData();
   const item = items.find((i) => i.id === req.params.id);
@@ -154,9 +147,9 @@ app.get("/inventory/:id/photo", (req, res) => {
   res.sendFile(path.resolve(cacheDir, item.photo));
 });
 
-// ------------------------
+
 //   PUT /inventory/:id/photo
-// ------------------------
+
 app.put("/inventory/:id/photo", upload.single("photo"), (req, res) => {
   const items = loadData();
   const item = items.find((i) => i.id === req.params.id);
@@ -171,9 +164,9 @@ app.put("/inventory/:id/photo", upload.single("photo"), (req, res) => {
   res.json({ message: "Photo updated" });
 });
 
-// ------------------------
+
 //   DELETE /inventory/:id
-// ------------------------
+
 app.delete("/inventory/:id", (req, res) => {
   const items = loadData();
   const item = items.find((i) => i.id === req.params.id);
@@ -192,9 +185,9 @@ app.delete("/inventory/:id", (req, res) => {
   res.json({ message: "Deleted" });
 });
 
-// ------------------------
+
 //   POST /search
-// ------------------------
+
 app.post("/search", (req, res) => {
   const { id, has_photo } = req.body;
   const items = loadData();
@@ -215,16 +208,16 @@ app.post("/search", (req, res) => {
   res.json(result);
 });
 
-// ------------------------
+
 //   405 handler
-// ------------------------
+
 app.use((req, res) => {
   res.status(405).json({ error: "Method not allowed" });
 });
 
-// ------------------------
+
 //   Start server
-// ------------------------
+
 app.listen(port, host, () => {
   console.log(`Server running at http://${host}:${port}`);
 });
